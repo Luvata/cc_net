@@ -42,10 +42,8 @@ def opening(file: Path, output: Path = None, n_docs: int = 1_000_000):
     return jsonql.run_pipes(
         functools.partial(extract_opening_text, n_docs=n_docs),
         file=file,
-        output=tmp(output) if output else None,
+        output=output
     )
-    if output:
-        tmp(output).replace(output)
 
 
 def extract_opening_text(source, n_docs: int = 10_000):
