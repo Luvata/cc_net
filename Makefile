@@ -123,7 +123,7 @@ data/cirrus/txt/%.opening.txt: data/cirrus/gz/%.json.gz
 		--file $< --output $@
 
 data/cirrus/gz/%.json.gz:
-	mkdir $(@D)
+	mkdir -p $(@D)
 	python get_wiki_cirrus.py dl --lang $(call get_lang,$(@F)) --output_dir $(@D)
 
 clean:
