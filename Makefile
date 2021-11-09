@@ -11,7 +11,7 @@ langs?=af,ar,az,be,bg,bn,ca,cs,da,de,el,en,es,et,fa,fi,fr,gu,he,hi,hr,hu,hy,id,\
 is,it,ja,ka,kk,km,kn,ko,lt,lv,mk,ml,mn,mr,my,ne,nl,no,pl,pt,ro,ru,uk,zh
 
 # Experiment config
-NDOC_FOR_LM=1_000_000
+NDOC_FOR_LM=1_500_000
 NDOC_FOR_SENTPIECE=400000
 VOCAB_SIZE=65536
 
