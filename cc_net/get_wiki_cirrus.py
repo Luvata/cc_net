@@ -13,7 +13,7 @@ import re
 import subprocess
 import urllib.request
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
 import func_argparse
 from bs4 import BeautifulSoup  # type: ignore
@@ -28,13 +28,13 @@ def tmp(file: Path) -> Path:
     return file.parent / ("tmp." + file.name)
 
 
-def opening(file: Path, output: Path = None, n_docs: int = 1_000_000):
+def opening(file: Path, output: Path = None, n_docs: Optional[int] = None):
     """Will dump the tokenized opening text of the given Wikipedia.
 
     Args:
         - file: File containing the Wikipedia dump.
         - output: Output file.
-        - n_docs: How many docs to parse
+        - n_docs: How many docs to parse, if None, will parse all.
         - tokenize: whether to tokenize the text
         - lang: Language code used to chose the tokenizer
     """
@@ -46,7 +46,7 @@ def opening(file: Path, output: Path = None, n_docs: int = 1_000_000):
     )
 
 
-def extract_opening_text(source, n_docs: int = 10_000):
+def extract_opening_text(source, n_docs: Optional[int] = None):
     i = 0
     for doc in jsonql.read_jsons(source):
         if not doc:
@@ -56,9 +56,9 @@ def extract_opening_text(source, n_docs: int = 10_000):
         if not text:
             continue
 
-        yield text_normalizer.normalize(text)
+        yield text_normalizer.normalize(text, accent=False)
         i += 1
-        if i >= n_docs:
+        if n_docs is not None and i >= n_docs:
             break
 
 
